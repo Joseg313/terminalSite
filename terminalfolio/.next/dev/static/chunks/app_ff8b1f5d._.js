@@ -26,6 +26,27 @@ const TerminalComponent = ()=>{
             term.onData({
                 "TerminalComponent.useEffect": (data)=>term.write(data)
             }["TerminalComponent.useEffect"]);
+            term.onKey({
+                "TerminalComponent.useEffect": (ev)=>{
+                    if (ev.domEvent.key === "Enter") {
+                        //select current line
+                        console.log(term.rows);
+                        const currentLineIndex = 1;
+                        term.selectLines(currentLineIndex, currentLineIndex);
+                        const currentLine = term.getSelection();
+                        term.writeln(currentLine);
+                        // if (currentLine.trim().length == 0) {
+                        //   term.writeln("")
+                        //   term.write("$  ")
+                        // } else if (currentLine === "clear") {
+                        //   term.clear()
+                        // }
+                        term.clearSelection();
+                    // if empty just writeln("")
+                    // if something on line, read and store it and try to match it with something
+                    }
+                }
+            }["TerminalComponent.useEffect"]);
             return ({
                 "TerminalComponent.useEffect": ()=>{
                     term.dispose();
@@ -37,7 +58,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 22,
+        lineNumber: 52,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
