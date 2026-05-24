@@ -24,29 +24,45 @@ const TerminalComponent = ()=>{
             term.open(terminalRef.current);
             term.writeln('Welcome to portfolio');
             term.onData({
-                "TerminalComponent.useEffect": (data)=>term.write(data)
-            }["TerminalComponent.useEffect"]);
-            term.onKey({
-                "TerminalComponent.useEffect": (ev)=>{
-                    if (ev.domEvent.key === "Enter") {
-                        //select current line
-                        console.log(term.rows);
-                        const currentLineIndex = 1;
-                        term.selectLines(currentLineIndex, currentLineIndex);
-                        const currentLine = term.getSelection();
-                        term.writeln(currentLine);
-                        // if (currentLine.trim().length == 0) {
-                        //   term.writeln("")
-                        //   term.write("$  ")
-                        // } else if (currentLine === "clear") {
-                        //   term.clear()
-                        // }
-                        term.clearSelection();
-                    // if empty just writeln("")
-                    // if something on line, read and store it and try to match it with something
+                "TerminalComponent.useEffect": (data)=>{
+                    console.log(data);
+                    if (data === "\r") {
+                        // get the contents of current line
+                        const buffer = term.buffer.active;
+                        const currentLine = buffer.getLine(buffer.cursorY)?.translateToString();
+                        if (currentLine?.trim() === "clear") {
+                            // TODO look into this and try to change to term.clear in the future
+                            term.reset();
+                        } else if (currentLine?.trim().length === 0) {
+                            term.writeln("");
+                        } else {
+                            term.writeln("");
+                            term.write("Not Found\n");
+                        }
+                    } else {
+                        term.write(data);
                     }
                 }
             }["TerminalComponent.useEffect"]);
+            // term.onKey(ev => {
+            //   if (ev.domEvent.key === "Enter") { 
+            //     term.clear()
+            //select current line
+            // const buffer = term.buffer.active
+            // const currentLine = buffer.getLine(buffer.cursorY)?.translateToString()
+            // console.log(typeof currentLine)
+            // console.log(currentLine)
+            // if (currentLine.trim().length === 0) {
+            //   term.writeln("")
+            //   term.write("$  ")
+            // } else if (currentLine == "clear") {
+            //   term.clear()
+            // } else {
+            //   term.writeln("Not Found")
+            // }
+            // term.clearSelection()
+            //   }
+            // })
             return ({
                 "TerminalComponent.useEffect": ()=>{
                     term.dispose();
@@ -58,7 +74,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 52,
+        lineNumber: 76,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
