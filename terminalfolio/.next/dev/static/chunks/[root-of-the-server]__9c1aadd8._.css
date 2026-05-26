@@ -1,0 +1,372 @@
+/* [next]/internal/font/google/geist_a71539c9.module.css [app-client] (css) */
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../media/8a480f0b521d4e75-s.8e0177b5.woff2") format("woff2");
+  unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+}
+
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../media/7178b3e590c64307-s.b97b3418.woff2") format("woff2");
+  unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: Geist;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../media/caa3a2e1cccd8315-s.p.853070df.woff2") format("woff2");
+  unicode-range: U+??, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: Geist Fallback;
+  src: local(Arial);
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0.0%;
+  size-adjust: 104.76%;
+}
+
+.geist_a71539c9-module__T19VSG__className {
+  font-family: Geist, Geist Fallback;
+  font-style: normal;
+}
+
+.geist_a71539c9-module__T19VSG__variable {
+  --font-geist-sans: "Geist", "Geist Fallback";
+}
+
+/* [next]/internal/font/google/geist_mono_8d43a2aa.module.css [app-client] (css) */
+@font-face {
+  font-family: Geist Mono;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../media/4fa387ec64143e14-s.c1fdd6c2.woff2") format("woff2");
+  unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+}
+
+@font-face {
+  font-family: Geist Mono;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../media/bbc41e54d2fcbd21-s.799d8ef8.woff2") format("woff2");
+  unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: Geist Mono;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../media/797e433ab948586e-s.p.dbea232f.woff2") format("woff2");
+  unicode-range: U+??, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: Geist Mono Fallback;
+  src: local(Arial);
+  ascent-override: 74.67%;
+  descent-override: 21.92%;
+  line-gap-override: 0.0%;
+  size-adjust: 134.59%;
+}
+
+.geist_mono_8d43a2aa-module__8Li5zG__className {
+  font-family: Geist Mono, Geist Mono Fallback;
+  font-style: normal;
+}
+
+.geist_mono_8d43a2aa-module__8Li5zG__variable {
+  --font-geist-mono: "Geist Mono", "Geist Mono Fallback";
+}
+
+/* [project]/app/globals.css [app-client] (css) */
+:root {
+  --background: #fff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* [project]/node_modules/@xterm/xterm/css/xterm.css [app-client] (css) */
+.xterm {
+  cursor: text;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.xterm.focus, .xterm:focus {
+  outline: none;
+}
+
+.xterm .xterm-helpers {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+}
+
+.xterm .xterm-helper-textarea {
+  opacity: 0;
+  z-index: -5;
+  white-space: nowrap;
+  resize: none;
+  border: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: -9999em;
+  overflow: hidden;
+}
+
+.xterm .composition-view {
+  color: #fff;
+  white-space: nowrap;
+  z-index: 1;
+  background: #000;
+  display: none;
+  position: absolute;
+}
+
+.xterm .composition-view.active {
+  display: block;
+}
+
+.xterm .xterm-viewport {
+  cursor: default;
+  background-color: #000;
+  position: absolute;
+  inset: 0;
+  overflow-y: scroll;
+}
+
+.xterm .xterm-screen {
+  position: relative;
+}
+
+.xterm .xterm-screen canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.xterm-char-measure-element {
+  visibility: hidden;
+  line-height: normal;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -9999em;
+}
+
+.xterm.enable-mouse-events {
+  cursor: default;
+}
+
+.xterm.xterm-cursor-pointer, .xterm .xterm-cursor-pointer {
+  cursor: pointer;
+}
+
+.xterm.column-select.focus {
+  cursor: crosshair;
+}
+
+.xterm .xterm-accessibility:not(.debug), .xterm .xterm-message {
+  z-index: 10;
+  color: #0000;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.xterm .xterm-accessibility-tree:not(.debug) ::selection {
+  color: #0000;
+}
+
+.xterm .xterm-accessibility-tree {
+  -webkit-user-select: text;
+  user-select: text;
+  white-space: pre;
+  font-family: monospace;
+}
+
+.xterm .xterm-accessibility-tree > div {
+  transform-origin: 0;
+  width: fit-content;
+}
+
+.xterm .live-region {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: -9999px;
+  overflow: hidden;
+}
+
+.xterm-dim {
+  opacity: 1 !important;
+}
+
+.xterm-underline-1 {
+  text-decoration: underline;
+}
+
+.xterm-underline-2 {
+  -webkit-text-decoration: underline double;
+  text-decoration: underline double;
+}
+
+.xterm-underline-3 {
+  -webkit-text-decoration: underline wavy;
+  text-decoration: underline wavy;
+}
+
+.xterm-underline-4 {
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.xterm-underline-5 {
+  -webkit-text-decoration: underline dashed;
+  text-decoration: underline dashed;
+}
+
+.xterm-overline {
+  text-decoration: overline;
+}
+
+.xterm-overline.xterm-underline-1 {
+  text-decoration: underline overline;
+}
+
+.xterm-overline.xterm-underline-2 {
+  -webkit-text-decoration: overline double underline;
+  text-decoration: overline double underline;
+}
+
+.xterm-overline.xterm-underline-3 {
+  -webkit-text-decoration: overline wavy underline;
+  text-decoration: overline wavy underline;
+}
+
+.xterm-overline.xterm-underline-4 {
+  -webkit-text-decoration: overline dotted underline;
+  text-decoration: overline dotted underline;
+}
+
+.xterm-overline.xterm-underline-5 {
+  -webkit-text-decoration: overline dashed underline;
+  text-decoration: overline dashed underline;
+}
+
+.xterm-strikethrough {
+  text-decoration: line-through;
+}
+
+.xterm-screen .xterm-decoration-container .xterm-decoration {
+  z-index: 6;
+  position: absolute;
+}
+
+.xterm-screen .xterm-decoration-container .xterm-decoration.xterm-decoration-top-layer {
+  z-index: 7;
+}
+
+.xterm-decoration-overview-ruler {
+  z-index: 8;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.xterm-decoration-top {
+  z-index: 2;
+  position: relative;
+}
+
+.xterm .xterm-scrollable-element > .scrollbar {
+  cursor: default;
+}
+
+.xterm .xterm-scrollable-element > .scrollbar > .scra {
+  cursor: pointer;
+  font-size: 11px !important;
+}
+
+.xterm .xterm-scrollable-element > .visible {
+  opacity: 1;
+  z-index: 11;
+  background: none;
+  transition: opacity .1s linear;
+}
+
+.xterm .xterm-scrollable-element > .invisible {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.xterm .xterm-scrollable-element > .invisible.fade {
+  transition: opacity .8s linear;
+}
+
+.xterm .xterm-scrollable-element > .shadow {
+  display: none;
+  position: absolute;
+}
+
+.xterm .xterm-scrollable-element > .shadow.top {
+  width: 100%;
+  height: 3px;
+  box-shadow: var(--vscode-scrollbar-shadow, #000) 0 6px 6px -6px inset;
+  display: block;
+  top: 0;
+  left: 3px;
+}
+
+.xterm .xterm-scrollable-element > .shadow.left {
+  width: 3px;
+  height: 100%;
+  box-shadow: var(--vscode-scrollbar-shadow, #000) 6px 0 6px -6px inset;
+  display: block;
+  top: 3px;
+  left: 0;
+}
+
+.xterm .xterm-scrollable-element > .shadow.top-left-corner {
+  width: 3px;
+  height: 3px;
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.xterm .xterm-scrollable-element > .shadow.top.left {
+  box-shadow: var(--vscode-scrollbar-shadow, #000) 6px 0 6px -6px inset;
+}
+
+/*# sourceMappingURL=%5Broot-of-the-server%5D__9c1aadd8._.css.map*/
