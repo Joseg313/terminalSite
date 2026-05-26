@@ -20,12 +20,12 @@ const TerminalComponent = () => {
       // console.log(data)
       input_buffer = input_buffer + data
       console.log("inputbuffer:", input_buffer)
+      
       if (data.endsWith("\r")) {
+        
         // get the contents of current line
-        // const buffer = term.buffer.active
-        // const currentLine = buffer.getLine(buffer.cursorY)?.translateToString()
         const currentLine = input_buffer.slice(0, -1)
-        console.log("currentLine0, ", currentLine)
+        console.log("currentLine, ", currentLine)
         input_buffer = ""
         if (currentLine?.trim() === "clear") {
           // TODO look into this and try to change to term.clear in the future
@@ -39,7 +39,17 @@ const TerminalComponent = () => {
           term.writeln("not found")
           term.write("$ ")
         }
-      
+      }
+      else if (data.endsWith("\x7f")) {
+        input_buffer = input_buffer.slice(0, -2)
+        console.log("input after slicing", input_buffer)
+        console.log("inputlength after slicing", input_buffer.length)
+        if (input_buffer.length >= 0) { 
+          term.write('\b')
+          term.write(" ")
+          term.write('\b')
+        }
+       
       } else {
         term.write(data)
 
