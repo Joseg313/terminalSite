@@ -16,11 +16,15 @@ const TerminalComponent = () => {
     term.writeln('Welcome to my portfolio')
     term.write("$ ")
     let input_buffer = ""
+    
+    
+    // handles when the user types
     term.onData((data) => {
       // console.log(data)
       input_buffer = input_buffer + data
-      console.log("inputbuffer:", input_buffer)
+      // console.log("inputbuffer:", input_buffer)
       
+      // handles when the user hits enter key
       if (data.endsWith("\r")) {
         
         // get the contents of current line
@@ -40,11 +44,16 @@ const TerminalComponent = () => {
           term.write("$ ")
         }
       }
+      // below handles the backspace key
       else if (data.endsWith("\x7f")) {
-        input_buffer = input_buffer.slice(0, -2)
-        console.log("input after slicing", input_buffer)
-        console.log("inputlength after slicing", input_buffer.length)
-        if (input_buffer.length >= 0) { 
+        // remove the \x7f
+        input_buffer = input_buffer.slice(0, -1)
+        // console.log("input buffer len b4 slice", input_buffer.length, "input buffer b4 slice", input_buffer)
+        if (input_buffer.length > 0 && input_buffer !== "\x7f") { 
+          input_buffer = input_buffer.slice(0, -1)
+          // console.log("input after slicing", input_buffer)
+          // console.log("inputlength after slicing", input_buffer.length)
+          
           term.write('\b')
           term.write(" ")
           term.write('\b')
