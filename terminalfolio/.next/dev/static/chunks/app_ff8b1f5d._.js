@@ -22,7 +22,10 @@ const TerminalComponent = ()=>{
             const term = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Terminal"]();
             term.open(terminalRef.current);
             term.writeln('Welcome to my portfolio');
-            term.write("$ ");
+            // TODO look into how to get the .txt file displayed
+            // fetch('public\ascii-art.txt')
+            //   .then((response) => response.json())
+            // term.write("$ ")
             let input_buffer = "";
             // handles when the user types
             term.onData({
@@ -76,7 +79,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 75,
+        lineNumber: 82,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };

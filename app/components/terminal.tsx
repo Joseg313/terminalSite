@@ -14,7 +14,14 @@ const TerminalComponent = () => {
     
     term.open(terminalRef.current)
     term.writeln('Welcome to my portfolio')
-    term.write("$ ")
+    
+    
+    
+    // TODO look into how to get the .txt file displayed
+    // fetch('public\ascii-art.txt')
+    //   .then((response) => response.json())
+      
+    // term.write("$ ")
     let input_buffer = ""
     
     
