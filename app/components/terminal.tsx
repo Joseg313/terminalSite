@@ -10,18 +10,22 @@ const TerminalComponent = () => {
 
   useEffect (() => {
     if (!terminalRef.current) return;
-    const term = new Terminal();
+    const term = new Terminal({
+      cols: 200,
+      rows: 45
+    });
     
     term.open(terminalRef.current)
-    term.writeln('Welcome to my portfolio')
     
-    
-    
-    // TODO look into how to get the .txt file displayed
-    // fetch('public\ascii-art.txt')
-    //   .then((response) => response.json())
-      
-    // term.write("$ ")
+
+    // fetch('/ascii-art2.txt')
+    fetch('/name.txt')  
+      .then((response) => response.text())
+      .then((text) => {
+        text.split('\n').forEach((line) => term.writeln(line))
+        term.write("$ ")
+      })
+
     let input_buffer = ""
     
     

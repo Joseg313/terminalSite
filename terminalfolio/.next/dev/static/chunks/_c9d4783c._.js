@@ -1,94 +1,9 @@
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push([typeof document === "object" ? document.currentScript : undefined,
-"[project]/app/components/terminal.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
-"use strict";
+"[project]/app/components/terminal.tsx [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
 
-__turbopack_context__.s([
-    "default",
-    ()=>__TURBOPACK__default__export__
-]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-(()=>{
-    const e = new Error("Cannot find module 'xterm'");
-    e.code = 'MODULE_NOT_FOUND';
-    throw e;
-})();
-;
-var _s = __turbopack_context__.k.signature();
-;
-;
-const TerminalComponent = ()=>{
-    _s();
-    const terminalRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "TerminalComponent.useEffect": ()=>{
-            if (!terminalRef.current) return;
-            const term = new Terminal();
-            term.open(terminalRef.current);
-            term.writeln('Welcome to my portfolio');
-            term.onData({
-                "TerminalComponent.useEffect": (data)=>{
-                    // console.log(data)
-                    if (data === "\r") {
-                        // get the contents of current line
-                        const buffer = term.buffer.active;
-                        const currentLine = buffer.getLine(buffer.cursorY)?.translateToString();
-                        if (currentLine?.trim() === "clear") {
-                            // TODO look into this and try to change to term.clear in the future
-                            term.reset();
-                        } else if (currentLine?.trim().length === 0) {
-                            term.writeln("");
-                        } else {
-                            term.writeln("");
-                            term.write("Not Found\n");
-                        }
-                    } else {
-                        term.write(data);
-                    }
-                }
-            }["TerminalComponent.useEffect"]);
-            // term.onKey(ev => {
-            //   if (ev.domEvent.key === "Enter") { 
-            //     term.clear()
-            //select current line
-            // const buffer = term.buffer.active
-            // const currentLine = buffer.getLine(buffer.cursorY)?.translateToString()
-            // console.log(typeof currentLine)
-            // console.log(currentLine)
-            // if (currentLine.trim().length === 0) {
-            //   term.writeln("")
-            //   term.write("$  ")
-            // } else if (currentLine == "clear") {
-            //   term.clear()
-            // } else {
-            //   term.writeln("Not Found")
-            // }
-            // term.clearSelection()
-            //   }
-            // })
-            return ({
-                "TerminalComponent.useEffect": ()=>{
-                    term.dispose();
-                }
-            })["TerminalComponent.useEffect"];
-        }
-    }["TerminalComponent.useEffect"], []);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        ref: terminalRef
-    }, void 0, false, {
-        fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 75,
-        columnNumber: 10
-    }, ("TURBOPACK compile-time value", void 0));
-};
-_s(TerminalComponent, "kEUNaEDsXq6NFlYUDdaogKRz/hM=");
-_c = TerminalComponent;
-const __TURBOPACK__default__export__ = TerminalComponent;
-var _c;
-__turbopack_context__.k.register(_c, "TerminalComponent");
-if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
-    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
-}
+const e = new Error("Could not parse module '[project]/app/components/terminal.tsx'\n\nExpected ',', got '-'");
+e.code = 'MODULE_UNPARSABLE';
+throw e;
 }),
 "[project]/app/page.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
