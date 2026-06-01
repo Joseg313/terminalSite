@@ -19,13 +19,22 @@ const TerminalComponent = ()=>{
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "TerminalComponent.useEffect": ()=>{
             if (!terminalRef.current) return;
-            const term = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Terminal"]();
+            const term = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Terminal"]({
+                cols: 200,
+                rows: 45
+            });
             term.open(terminalRef.current);
-            term.writeln('Welcome to my portfolio');
-            // TODO look into how to get the .txt file displayed
-            // fetch('public\ascii-art.txt')
-            //   .then((response) => response.json())
-            // term.write("$ ")
+            // fetch('/ascii-art2.txt')
+            fetch('/name.txt').then({
+                "TerminalComponent.useEffect": (response)=>response.text()
+            }["TerminalComponent.useEffect"]).then({
+                "TerminalComponent.useEffect": (text)=>{
+                    text.split('\n').forEach({
+                        "TerminalComponent.useEffect": (line)=>term.writeln(line)
+                    }["TerminalComponent.useEffect"]);
+                    term.write("$ ");
+                }
+            }["TerminalComponent.useEffect"]);
             let input_buffer = "";
             // handles when the user types
             term.onData({
@@ -79,7 +88,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 82,
+        lineNumber: 86,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
