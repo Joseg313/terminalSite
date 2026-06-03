@@ -46,6 +46,16 @@ const TerminalComponent = () => {
           // TODO look into this and try to change to term.clear in the future
           term.reset()
           term.write("$ ")
+        } else if (currentLine?.trim() === "about") {
+          term.writeln("")
+          fetch('/about.txt')  
+            .then((response) => response.text())
+            .then((text) => {
+              text.split('\n').forEach((line) => term.writeln(line))
+              term.write("$ ")
+            })
+        
+        
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
           term.write("$ ")
