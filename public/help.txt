@@ -1,0 +1,5 @@
+Available Commands:
+help
+clear
+about
+connect

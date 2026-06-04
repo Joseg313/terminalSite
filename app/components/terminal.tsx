@@ -76,6 +76,14 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+        } else if (currentLine?.trim() === "help") {
+          term.writeln("")
+          fetch('/help.txt')  
+            .then((response) => response.text())
+            .then((text) => {
+              text.split('\n').forEach((line) => term.writeln(line))
+              term.write("$ ")
+            })
           
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
