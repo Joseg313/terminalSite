@@ -27,26 +27,6 @@ const TerminalComponent = ()=>{
                 rows: 45
             });
             term.open(terminalRef.current);
-            const activateLink = {
-                "TerminalComponent.useEffect.activateLink": (event, uri)=>{
-                    window.open(uri, '_blank')?.focus();
-                }
-            }["TerminalComponent.useEffect.activateLink"];
-            const linkHandler = {
-                activate: {
-                    "TerminalComponent.useEffect": (event, text, range)=>{
-                        activateLink(event, text);
-                    }
-                }["TerminalComponent.useEffect"],
-                hover: {
-                    "TerminalComponent.useEffect": (event, text, range)=>{}
-                }["TerminalComponent.useEffect"],
-                leave: {
-                    "TerminalComponent.useEffect": (event, text, range)=>{}
-                }["TerminalComponent.useEffect"],
-                allowNonHttpProtocols: true
-            };
-            const webLinksAddon = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$addon$2d$web$2d$links$2f$lib$2f$addon$2d$web$2d$links$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WebLinksAddon"](activateLink, linkHandler);
             term.loadAddon(new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$addon$2d$web$2d$links$2f$lib$2f$addon$2d$web$2d$links$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WebLinksAddon"]());
             // fetch('/ascii-art2.txt')
             fetch('/name.txt').then({
@@ -148,7 +128,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 125,
+        lineNumber: 114,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
