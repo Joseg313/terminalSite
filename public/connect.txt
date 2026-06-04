@@ -1,3 +1,4 @@
 LinkedIn: https://www.linkedin.com/in/jose-garcia-iii/
 GitHub: https://github.com/Joseg313
 Email: josegarcia [at] college [dot] harvard [dot] edu
+Resume: https://github.com/Joseg313/terminalSite/raw/main/public/Resume_JAG.pdf

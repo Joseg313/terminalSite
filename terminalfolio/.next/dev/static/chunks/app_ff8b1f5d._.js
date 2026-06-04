@@ -100,6 +100,18 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
+                        } else if (currentLine?.trim() === "help") {
+                            term.writeln("");
+                            fetch('/help.txt').then({
+                                "TerminalComponent.useEffect": (response)=>response.text()
+                            }["TerminalComponent.useEffect"]).then({
+                                "TerminalComponent.useEffect": (text)=>{
+                                    text.split('\n').forEach({
+                                        "TerminalComponent.useEffect": (line)=>term.writeln(line)
+                                    }["TerminalComponent.useEffect"]);
+                                    term.write("$ ");
+                                }
+                            }["TerminalComponent.useEffect"]);
                         } else if (currentLine?.trim().length === 0) {
                             term.writeln("");
                             term.write("$ ");
@@ -136,7 +148,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 117,
+        lineNumber: 125,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
