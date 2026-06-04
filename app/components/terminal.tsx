@@ -1,6 +1,6 @@
 import React, { useEffect, useRef} from "react";
 import { Terminal } from '@xterm/xterm'
-
+import { WebLinksAddon } from "@xterm/addon-web-links";
 
 const TerminalComponent = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -11,13 +11,27 @@ const TerminalComponent = () => {
   useEffect (() => {
     if (!terminalRef.current) return;
     const term = new Terminal({
+      cursorBlink: true,
       cols: 200,
       rows: 45
     });
     
     term.open(terminalRef.current)
     
+    const activateLink = (event, uri)=> {
+      window.open(uri, '_blank')?.focus();
+    };
 
+    const linkHandler = {
+      activate: (event, text, range) => { activateLink(event, text); } ,
+      hover: (event, text, range) => { /* nothing, by default */},
+      leave: (event, text, range) => { /* nothing, by default */},
+      allowNonHttpProtocols: true
+    };
+
+    const webLinksAddon = new WebLinksAddon(activateLink, linkHandler);
+    term.loadAddon(new WebLinksAddon());
+    
     // fetch('/ascii-art2.txt')
     fetch('/name.txt')  
       .then((response) => response.text())
@@ -54,8 +68,15 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
-        
-        
+        } else if (currentLine?.trim() === "connect") {
+          term.writeln("")
+          fetch('/connect.txt')  
+            .then((response) => response.text())
+            .then((text) => {
+              text.split('\n').forEach((line) => term.writeln(line))
+              term.write("$ ")
+            })
+          
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
           term.write("$ ")
