@@ -9,8 +9,10 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@xterm/xterm/lib/xterm.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$addon$2d$web$2d$links$2f$lib$2f$addon$2d$web$2d$links$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@xterm/addon-web-links/lib/addon-web-links.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+;
 ;
 ;
 const TerminalComponent = ()=>{
@@ -20,10 +22,32 @@ const TerminalComponent = ()=>{
         "TerminalComponent.useEffect": ()=>{
             if (!terminalRef.current) return;
             const term = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Terminal"]({
+                cursorBlink: true,
                 cols: 200,
                 rows: 45
             });
             term.open(terminalRef.current);
+            const activateLink = {
+                "TerminalComponent.useEffect.activateLink": (event, uri)=>{
+                    window.open(uri, '_blank')?.focus();
+                }
+            }["TerminalComponent.useEffect.activateLink"];
+            const linkHandler = {
+                activate: {
+                    "TerminalComponent.useEffect": (event, text, range)=>{
+                        activateLink(event, text);
+                    }
+                }["TerminalComponent.useEffect"],
+                hover: {
+                    "TerminalComponent.useEffect": (event, text, range)=>{}
+                }["TerminalComponent.useEffect"],
+                leave: {
+                    "TerminalComponent.useEffect": (event, text, range)=>{}
+                }["TerminalComponent.useEffect"],
+                allowNonHttpProtocols: true
+            };
+            const webLinksAddon = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$addon$2d$web$2d$links$2f$lib$2f$addon$2d$web$2d$links$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WebLinksAddon"](activateLink, linkHandler);
+            term.loadAddon(new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$addon$2d$web$2d$links$2f$lib$2f$addon$2d$web$2d$links$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WebLinksAddon"]());
             // fetch('/ascii-art2.txt')
             fetch('/name.txt').then({
                 "TerminalComponent.useEffect": (response)=>response.text()
@@ -55,6 +79,18 @@ const TerminalComponent = ()=>{
                         } else if (currentLine?.trim() === "about") {
                             term.writeln("");
                             fetch('/about.txt').then({
+                                "TerminalComponent.useEffect": (response)=>response.text()
+                            }["TerminalComponent.useEffect"]).then({
+                                "TerminalComponent.useEffect": (text)=>{
+                                    text.split('\n').forEach({
+                                        "TerminalComponent.useEffect": (line)=>term.writeln(line)
+                                    }["TerminalComponent.useEffect"]);
+                                    term.write("$ ");
+                                }
+                            }["TerminalComponent.useEffect"]);
+                        } else if (currentLine?.trim() === "connect") {
+                            term.writeln("");
+                            fetch('/connect.txt').then({
                                 "TerminalComponent.useEffect": (response)=>response.text()
                             }["TerminalComponent.useEffect"]).then({
                                 "TerminalComponent.useEffect": (text)=>{
@@ -100,7 +136,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 96,
+        lineNumber: 117,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
