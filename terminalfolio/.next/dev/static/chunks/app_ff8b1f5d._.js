@@ -15,6 +15,14 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+function sleep(milliseconds) {
+    const start = new Date().getTime();
+    for(let i = 0; i < 1e7; i++){
+        if (new Date().getTime() - start > milliseconds) {
+            break;
+        }
+    }
+}
 const TerminalComponent = ()=>{
     _s();
     const terminalRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -92,6 +100,21 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
+                        } else if (currentLine?.trim() === "title") {
+                            // set cursor to start postition
+                            term.write("\x1b[65G \x1b[0m");
+                            term.write("\x1b[19A \x1b[0m");
+                            // TODO fix the loop not delaying correctly
+                            for(let i = 0; i < 10; i++){
+                                term.write("Z");
+                                term.write("\x1b[1B \x1b[0m");
+                                term.write("\x1b[3D \x1b[0m");
+                                setTimeout({
+                                    "TerminalComponent.useEffect": ()=>{
+                                        console.log("hello");
+                                    }
+                                }["TerminalComponent.useEffect"], 5000);
+                            }
                         } else if (currentLine?.trim().length === 0) {
                             term.writeln("");
                             term.write("$ ");
@@ -128,7 +151,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 114,
+        lineNumber: 136,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };

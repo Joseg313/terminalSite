@@ -2,6 +2,16 @@ import React, { useEffect, useRef} from "react";
 import { Terminal } from '@xterm/xterm'
 import { WebLinksAddon } from "@xterm/addon-web-links";
 
+function sleep(milliseconds: number) {
+  const start = new Date().getTime();
+  for (let i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+
 const TerminalComponent = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
   
@@ -73,7 +83,19 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
-          
+        } else if (currentLine?.trim() === "title") {
+          // set cursor to start postition
+          term.write("\x1b[65G \x1b[0m")
+          term.write("\x1b[19A \x1b[0m")
+          // TODO fix the loop not delaying correctly
+          for (let i = 0; i<10; i++){
+            term.write("Z")
+            term.write("\x1b[1B \x1b[0m")
+            term.write("\x1b[3D \x1b[0m")
+            setTimeout(() => {
+              console.log("hello");
+            }, 5000);
+          }
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
           term.write("$ ")
