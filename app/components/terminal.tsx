@@ -18,18 +18,7 @@ const TerminalComponent = () => {
     
     term.open(terminalRef.current)
     
-    const activateLink = (event, uri)=> {
-      window.open(uri, '_blank')?.focus();
-    };
-
-    const linkHandler = {
-      activate: (event, text, range) => { activateLink(event, text); } ,
-      hover: (event, text, range) => { /* nothing, by default */},
-      leave: (event, text, range) => { /* nothing, by default */},
-      allowNonHttpProtocols: true
-    };
-
-    const webLinksAddon = new WebLinksAddon(activateLink, linkHandler);
+ 
     term.loadAddon(new WebLinksAddon());
     
     // fetch('/ascii-art2.txt')
