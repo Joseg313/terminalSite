@@ -2,26 +2,17 @@ import React, { useEffect, useRef} from "react";
 import { Terminal } from '@xterm/xterm'
 import { WebLinksAddon } from "@xterm/addon-web-links";
 
-function sleep(milliseconds: number) {
-  const start = new Date().getTime();
-  for (let i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
 
 const TerminalComponent = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
-  
-  
+  const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms));
+  const symbs = ["%","&","*","#","[","^","@","%",")","X"]
 
 
   useEffect (() => {
     if (!terminalRef.current) return;
     const term = new Terminal({
-      cursorBlink: true,
+      cursorBlink: false,
       cols: 200,
       rows: 45
     });
@@ -85,17 +76,59 @@ const TerminalComponent = () => {
             })
         } else if (currentLine?.trim() === "title") {
           // set cursor to start postition
+          term.write("\x1b[?25l")
+          
           term.write("\x1b[65G \x1b[0m")
           term.write("\x1b[19A \x1b[0m")
-          // TODO fix the loop not delaying correctly
-          for (let i = 0; i<10; i++){
-            term.write("Z")
-            term.write("\x1b[1B \x1b[0m")
-            term.write("\x1b[3D \x1b[0m")
-            setTimeout(() => {
-              console.log("hello");
-            }, 5000);
+          
+          // oneLetter writes a single raindrop column
+          async function oneColumn(characters:Array<string>) {
+            while (input_buffer.length === 0) {
+              for (let i = 0; i<15; i++){
+                
+                term.write(symbs[Math.floor(Math.random() * symbs.length)])
+                await delay(200)
+                // move 1 left
+                term.write("\x1b[1D\x1b[0m")
+                term.write(symbs[Math.floor(Math.random() * symbs.length)])
+
+                // move 1 left
+                term.write("\x1b[1D\x1b[0m")
+                // move 1 down
+                term.write("\x1b[1B\x1b[0m")
+
+              }
+              term.write("\x1b[15A\x1b[0m")
+              for (let i = 0; i<15; i++){
+                
+                term.write(" ")
+                
+          
+
+                // move 1 left
+                term.write("\x1b[1D\x1b[0m")
+                // move 1 down
+                term.write("\x1b[1B\x1b[0m")
+
+              }
+              term.write("\x1b[15A\x1b[0m")
+            }
+            
           }
+          
+          oneColumn(symbs)
+          
+          // TODO call this function below for each character in symbs and pass in the symb on each iteration
+          
+          // async function lineOfLetters() {
+          //   for (const symb of symbs) {
+          //     oneLetter(symb)
+          //     await delay(1000);
+          //   }
+          // }
+          // lineOfLetters()
+
+          // term.write("\x1b[?25h \x1b[0m")
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
           term.write("$ ")
