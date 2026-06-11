@@ -142,7 +142,9 @@ const TerminalComponent = () => {
       term.write("$ ")
       term.write("\x1b7")
       await titleType()
-      await delay(2000)
+      // make cursor invisible
+      term.write("\x1b[?25l")
+      await delay(1000)
       raindropAnimation(symbs)  
     }
     
@@ -196,6 +198,7 @@ const TerminalComponent = () => {
         term.write("\x1b8")
         // make cursor visible
         term.write("\x1b[?25h")
+        // write the symbol the user just typed in to end the animation
         term.write(input_buffer)
         
     }
@@ -286,7 +289,10 @@ const TerminalComponent = () => {
           term.write(" ")
           term.write('\b')
         }
-       
+      // disable arrow keys
+      } else if (data.endsWith("\x1b[A") || data.endsWith("\x1b[B") || data.endsWith("\x1b[C") || data.endsWith("\x1b[D")) {
+        input_buffer = input_buffer.slice(0, -1)
+        
       } else {
         term.write(data)
 
