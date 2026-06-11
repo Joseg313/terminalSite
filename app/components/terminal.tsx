@@ -126,7 +126,7 @@ const TerminalComponent = () => {
       for (const character of subTitle) {
         term.write(character)
         // TODO turn this back to 100
-        await delay(1)
+        await delay(50)
       }
       term.write("\x1b8")
     }
@@ -202,22 +202,29 @@ const TerminalComponent = () => {
           async function oneColumn(symbs:Array<string>) {
             while (input_buffer.length === 0) {
               const currentColIndex:number = (Math.floor(Math.random() * (159 - 67 + 1)) + 67)
+              
+
               // const currentColIndex:number = 113
               const currentCol:string = "col"+currentColIndex.toString()
               const currentRowIndex:number = colAnimationIndicies[currentCol]
-              // TODO go back and delete the characters in the line
+              // move cursor to position described above
+              term.write(`\x1b[${currentRowIndex};${currentColIndex}H\x1b[0m`)
               if (currentRowIndex > 40) {
+                
                 for (let i = 0; i<15; i++){
+                  
+                  // move 1 up
+                  term.write("\x1b[1A\x1b[0m")
                   term.write(" ")
                   // move 1 left
                   term.write("\x1b[1D\x1b[0m")
-                  // move 1 up
-                  term.write("\x1b[1A\x1b[0m")
+                  
                 }
                 colAnimationIndicies[currentCol] = 25
+                console.log(colAnimationIndicies[currentCol])
+                await delay(10)
               } else {
-                // move cursor to position described above
-                term.write(`\x1b[${currentRowIndex};${currentColIndex}H\x1b[0m`)
+                
                 term.write(symbs[Math.floor(Math.random() * symbs.length)])
                 // term.write("X")
                 // move 1 left
@@ -227,8 +234,8 @@ const TerminalComponent = () => {
 
                 // update new cursor position
                 colAnimationIndicies[currentCol]++
-                // console.log(colAnimationIndicies[currentCol])
-                await delay(20)
+                
+                await delay(5)
 
               }
               
