@@ -135,6 +135,7 @@ const TerminalComponent = () => {
     
     // prints the large title, subtitle, and raindrop animation
     async function startUp(symbs:Array<string>) {
+      term.focus()
       const response = await fetch('/title.txt')  
       const text = await response.text()
       text.split('\n').forEach((line) => term.writeln(line))
@@ -195,6 +196,8 @@ const TerminalComponent = () => {
         term.write("\x1b8")
         // make cursor visible
         term.write("\x1b[?25h")
+        term.write(input_buffer)
+        
     }
 
 
@@ -254,6 +257,11 @@ const TerminalComponent = () => {
         } else if (currentLine?.trim() === "title") {
           term.reset()
           startUp(symbs)     
+        // experience function
+        } else if (currentLine?.trim() === "experience") {
+          term.writeln("")
+          term.writeln("Coming Soon")
+          term.write("$ ")    
         // if the user input is empty
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
