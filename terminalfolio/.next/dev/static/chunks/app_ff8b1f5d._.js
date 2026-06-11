@@ -20,9 +20,9 @@ const TerminalComponent = ()=>{
     const terminalRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const delay = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
     const subTitle = "thinker, programmer, learner";
-    // hold the current indicies for where the animation is at
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "TerminalComponent.useEffect": ()=>{
+            // available symbols for the raindrop animation
             const symbs = [
                 "%",
                 "&",
@@ -35,6 +35,7 @@ const TerminalComponent = ()=>{
                 ")",
                 "X"
             ];
+            // hold the current indicies for where the animation is at
             const colAnimationIndicies = {
                 col67: 25,
                 col68: 25,
@@ -139,6 +140,7 @@ const TerminalComponent = ()=>{
             term.open(terminalRef.current);
             term.loadAddon(new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$addon$2d$web$2d$links$2f$lib$2f$addon$2d$web$2d$links$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["WebLinksAddon"]());
             // functions
+            // types the subtitle of big name
             async function titleType() {
                 term.write("\x1b[102G\x1b[0m");
                 term.write("\x1b[16A\x1b[0m");
@@ -148,6 +150,7 @@ const TerminalComponent = ()=>{
                 }
                 term.write("\x1b8");
             }
+            // prints the large title, subtitle, and raindrop animation
             async function startUp(symbs) {
                 const response = await fetch('/title.txt');
                 const text = await response.text();
@@ -160,6 +163,8 @@ const TerminalComponent = ()=>{
                 await delay(2000);
                 raindropAnimation(symbs);
             }
+            // animates the termnial with matrix style raindrops
+            // TODO when the animation is stopped reset al lthe indicies to 25
             async function raindropAnimation(symbs) {
                 // save current position
                 term.write("\x1b7");
@@ -200,8 +205,9 @@ const TerminalComponent = ()=>{
                 term.write("\x1b[?25h");
             }
             // logic begins below
+            // begin the startup screen
             startUp(symbs);
-            // raindropAnimation(symbs)
+            // stores what the user currently has typed in 
             let input_buffer = "";
             // handles when the user types
             term.onData({
@@ -213,9 +219,11 @@ const TerminalComponent = ()=>{
                         const currentLine = input_buffer.slice(0, -1);
                         console.log("currentLine, ", currentLine);
                         input_buffer = "";
+                        // clear function
                         if (currentLine?.trim() === "clear") {
                             term.reset();
                             term.write("$ ");
+                        // about function
                         } else if (currentLine?.trim() === "about") {
                             term.writeln("");
                             fetch('/about.txt').then({
@@ -228,6 +236,7 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
+                        // connect function 
                         } else if (currentLine?.trim() === "connect") {
                             term.writeln("");
                             fetch('/connect.txt').then({
@@ -240,6 +249,7 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
+                        // help function
                         } else if (currentLine?.trim() === "help") {
                             term.writeln("");
                             fetch('/help.txt').then({
@@ -252,12 +262,15 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
+                        // title function
                         } else if (currentLine?.trim() === "title") {
                             term.reset();
                             startUp(symbs);
+                        // if the user input is empty
                         } else if (currentLine?.trim().length === 0) {
                             term.writeln("");
                             term.write("$ ");
+                        // error if no function is recognized
                         } else {
                             term.writeln("");
                             term.writeln("not found");
@@ -266,11 +279,8 @@ const TerminalComponent = ()=>{
                     } else if (data.endsWith("\x7f")) {
                         // remove the \x7f
                         input_buffer = input_buffer.slice(0, -1);
-                        // console.log("input buffer len b4 slice", input_buffer.length, "input buffer b4 slice", input_buffer)
                         if (input_buffer.length > 0 && input_buffer !== "\x7f") {
                             input_buffer = input_buffer.slice(0, -1);
-                            // console.log("input after slicing", input_buffer)
-                            // console.log("inputlength after slicing", input_buffer.length)
                             term.write('\b');
                             term.write(" ");
                             term.write('\b');
@@ -291,7 +301,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 298,
+        lineNumber: 295,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };

@@ -8,10 +8,12 @@ const TerminalComponent = () => {
   const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms));
   
   const subTitle = "thinker, programmer, learner"
-  // hold the current indicies for where the animation is at
+  
 
   useEffect (() => {
+    // available symbols for the raindrop animation
     const symbs = ["%","&","*","#","[","^","@","%",")","X"]
+    // hold the current indicies for where the animation is at
     const colAnimationIndicies = {
       col67: 25,
       col68: 25,
@@ -107,37 +109,31 @@ const TerminalComponent = () => {
       col158: 25,
       col159: 25
     } 
+    
+    
     if (!terminalRef.current) return;
     const term = new Terminal({
       cursorBlink: true,
       cols: 200,
       rows: 45
     });
-    
     term.open(terminalRef.current)
-    
- 
     term.loadAddon(new WebLinksAddon());
     
     // functions
+    
+    // types the subtitle of big name
     async function titleType() {
-      
       term.write("\x1b[102G\x1b[0m")
-      term.write("\x1b[16A\x1b[0m")
-      
+      term.write("\x1b[16A\x1b[0m")      
       for (const character of subTitle) {
         term.write(character)
-        
         await delay(50)
       }
       term.write("\x1b8")
     }
     
-
-    
-
-    
-    
+    // prints the large title, subtitle, and raindrop animation
     async function startUp(symbs:Array<string>) {
       const response = await fetch('/title.txt')  
       const text = await response.text()
@@ -146,10 +142,11 @@ const TerminalComponent = () => {
       term.write("\x1b7")
       await titleType()
       await delay(2000)
-      raindropAnimation(symbs)
-        
+      raindropAnimation(symbs)  
     }
     
+    // animates the termnial with matrix style raindrops
+    // TODO when the animation is stopped reset al lthe indicies to 25
     async function raindropAnimation(symbs:Array<string>) {
       // save current position
       term.write("\x1b7")
@@ -191,32 +188,30 @@ const TerminalComponent = () => {
             colAnimationIndicies[currentCol]++
             
             await delay(5)
-
           }
-              
+          
         }
         // restore cursor to the start position
         term.write("\x1b8")
         // make cursor visible
         term.write("\x1b[?25h")
-
     }
 
 
 
 
     // logic begins below
+    
+    // begin the startup screen
     startUp(symbs)
-    // raindropAnimation(symbs)
+    
+    // stores what the user currently has typed in 
     let input_buffer = ""
     
     
     // handles when the user types
     term.onData((data) => {
-      
       input_buffer = input_buffer + data
-      
-      
       // handles when the user hits enter key
       if (data.endsWith("\r")) {
         
@@ -224,10 +219,11 @@ const TerminalComponent = () => {
         const currentLine = input_buffer.slice(0, -1)
         console.log("currentLine, ", currentLine)
         input_buffer = ""
-        if (currentLine?.trim() === "clear") {
-          
+        // clear function
+        if (currentLine?.trim() === "clear") { 
           term.reset()
           term.write("$ ")
+        // about function
         } else if (currentLine?.trim() === "about") {
           term.writeln("")
           fetch('/about.txt')  
@@ -236,6 +232,7 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+        // connect function 
         } else if (currentLine?.trim() === "connect") {
           term.writeln("")
           fetch('/connect.txt')  
@@ -244,6 +241,7 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+        // help function
         } else if (currentLine?.trim() === "help") {
           term.writeln("")
           fetch('/help.txt')  
@@ -252,15 +250,15 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+        // title function
         } else if (currentLine?.trim() === "title") {
-
           term.reset()
-          startUp(symbs)
-          
-          
+          startUp(symbs)     
+        // if the user input is empty
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
           term.write("$ ")
+        // error if no function is recognized
         } else {
           term.writeln("")
           term.writeln("not found")
@@ -271,11 +269,10 @@ const TerminalComponent = () => {
       else if (data.endsWith("\x7f")) {
         // remove the \x7f
         input_buffer = input_buffer.slice(0, -1)
-        // console.log("input buffer len b4 slice", input_buffer.length, "input buffer b4 slice", input_buffer)
+        
         if (input_buffer.length > 0 && input_buffer !== "\x7f") { 
           input_buffer = input_buffer.slice(0, -1)
-          // console.log("input after slicing", input_buffer)
-          // console.log("inputlength after slicing", input_buffer.length)
+          
           
           term.write('\b')
           term.write(" ")
