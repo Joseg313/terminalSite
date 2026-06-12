@@ -146,6 +146,8 @@ const TerminalComponent = ()=>{
                 term.write("\x1b[102G\x1b[0m");
                 term.write("\x1b[16A\x1b[0m");
                 for (const character of subTitle){
+                    // turn color to green
+                    term.write("\x1b[38;5;82m");
                     term.write(character);
                     await delay(50);
                 }
@@ -265,9 +267,6 @@ const TerminalComponent = ()=>{
                             }["TerminalComponent.useEffect"]);
                         // help function
                         } else if (currentLine?.trim() === "help") {
-                            // turn on italics mode
-                            term.write("\x1b[3m");
-                            term.write("hello");
                             term.writeln("");
                             fetch('/help.txt').then({
                                 "TerminalComponent.useEffect": (response)=>response.text()
@@ -279,8 +278,6 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
-                            // turn off italics mode
-                            term.write("\x1b[23m");
                         // title function
                         } else if (currentLine?.trim() === "title") {
                             term.reset();
