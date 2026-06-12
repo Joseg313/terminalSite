@@ -38,26 +38,6 @@ const TerminalComponent = ()=>{
             ];
             // hold the current indicies for where the animation is at
             const colAnimationIndicies = {
-                col67: 25,
-                col68: 25,
-                col69: 25,
-                col70: 25,
-                col71: 25,
-                col72: 25,
-                col73: 25,
-                col74: 25,
-                col75: 25,
-                col76: 25,
-                col77: 25,
-                col78: 25,
-                col79: 25,
-                col80: 25,
-                col81: 25,
-                col82: 25,
-                col83: 25,
-                col84: 25,
-                col85: 25,
-                col86: 25,
                 col87: 25,
                 col88: 25,
                 col89: 25,
@@ -130,7 +110,27 @@ const TerminalComponent = ()=>{
                 col156: 25,
                 col157: 25,
                 col158: 25,
-                col159: 25
+                col159: 25,
+                col160: 25,
+                col161: 25,
+                col162: 25,
+                col163: 25,
+                col164: 25,
+                col165: 25,
+                col166: 25,
+                col167: 25,
+                col168: 25,
+                col169: 25,
+                col170: 25,
+                col171: 25,
+                col172: 25,
+                col173: 25,
+                col174: 25,
+                col175: 25,
+                col176: 25,
+                col177: 25,
+                col178: 25,
+                col179: 25
             };
             if (!terminalRef.current) return;
             const term = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Terminal"]({
@@ -143,7 +143,7 @@ const TerminalComponent = ()=>{
             // functions
             // types the subtitle of big name
             async function titleType() {
-                term.write("\x1b[102G\x1b[0m");
+                term.write("\x1b[119G\x1b[0m");
                 term.write("\x1b[16A\x1b[0m");
                 for (const character of subTitle){
                     // turn color to green
@@ -164,7 +164,7 @@ const TerminalComponent = ()=>{
                 term.write("$ ");
                 term.write("\x1b7");
                 await titleType();
-                term.write("press any key to stop animation and continue");
+                term.write("\x1b[1mpress any key to stop animation and continue\x1b[22m");
                 // make cursor invisible
                 term.write("\x1b[?25l");
                 await delay(1000);
@@ -177,9 +177,10 @@ const TerminalComponent = ()=>{
                 term.write("\x1b7");
                 // make cursor invisible
                 term.write("\x1b[?25l");
-                term.write("\x1b[25;67H\x1b[0m");
+                // move cursor to start postion
+                term.write("\x1b[25;87H\x1b[0m");
                 while(input_buffer.length === 0){
-                    const currentColIndex = Math.floor(Math.random() * (159 - 67 + 1)) + 67;
+                    const currentColIndex = Math.floor(Math.random() * (179 - 87 + 1)) + 87;
                     const currentCol = "col" + currentColIndex.toString();
                     const currentRowIndex = colAnimationIndicies[currentCol];
                     // move cursor to position described above
@@ -193,7 +194,6 @@ const TerminalComponent = ()=>{
                             term.write("\x1b[1D\x1b[0m");
                         }
                         colAnimationIndicies[currentCol] = 25;
-                        console.log(colAnimationIndicies[currentCol]);
                         await delay(10);
                     } else {
                         term.write(symbs[Math.floor(Math.random() * symbs.length)]);
@@ -217,8 +217,8 @@ const TerminalComponent = ()=>{
                 term.write("$ ");
                 // make cursor visible
                 term.write("\x1b[?25h");
-                // write the symbol the user just typed in to end the animation
-                term.write(input_buffer);
+                // write the symbol the user just typed in to end the animation, in yellow 
+                term.write(`\x1b[38;5;220m${input_buffer}\x1b[0m`);
             }
             // logic begins below
             // begin the startup screen
@@ -310,7 +310,8 @@ const TerminalComponent = ()=>{
                     } else if (data.endsWith("\x1b[A") || data.endsWith("\x1b[B") || data.endsWith("\x1b[C") || data.endsWith("\x1b[D")) {
                         input_buffer = input_buffer.slice(0, -1);
                     } else {
-                        term.write(data);
+                        // turn color to yellow and write what the user types
+                        term.write(`\x1b[38;5;220m${data}\x1b[0m`);
                     }
                 }
             }["TerminalComponent.useEffect"]);
@@ -325,7 +326,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 320,
+        lineNumber: 319,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -347,27 +348,53 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$terminal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/components/terminal.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$responsive$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-responsive/dist/esm/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
 function Home() {
+    _s();
+    const isDesktopOrLaptop = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$responsive$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMediaQuery"])({
+        query: '(min-width: 1000px)'
+    });
+    const isTabletOrMobile = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$responsive$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMediaQuery"])({
+        query: '(max-width: 1000px)'
+    });
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                children: "hello world"
+            isDesktopOrLaptop && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                style: {
+                    fontFamily: "manrope"
+                },
+                children: '"An idiot admires complextiy, a genius admires simplicity" -Terry A. Davis'
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 11,
-                columnNumber: 7
+                lineNumber: 37,
+                columnNumber: 9
+            }, this),
+            isTabletOrMobile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                children: "Please View on Laptop or Desktop for Best Experience"
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 41,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$terminal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 12,
+                lineNumber: 43,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true);
 }
+_s(Home, "RTb3BVLLqTUM1nu4Te9RZjH7wNE=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$responsive$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMediaQuery"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$responsive$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMediaQuery"]
+    ];
+});
 _c = Home;
 var _c;
 __turbopack_context__.k.register(_c, "Home");

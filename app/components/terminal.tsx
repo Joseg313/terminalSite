@@ -15,26 +15,6 @@ const TerminalComponent = () => {
     const symbs = ["%","&","*","#","[","^","@","%",")","X"]
     // hold the current indicies for where the animation is at
     const colAnimationIndicies = {
-      col67: 25,
-      col68: 25,
-      col69: 25,
-      col70: 25,
-      col71: 25,
-      col72: 25,
-      col73: 25,
-      col74: 25,
-      col75: 25,
-      col76: 25,
-      col77: 25,
-      col78: 25,
-      col79: 25,
-      col80: 25,
-      col81: 25,
-      col82: 25,
-      col83: 25,
-      col84: 25,
-      col85: 25,
-      col86: 25,
       col87: 25,
       col88: 25,
       col89: 25,
@@ -107,7 +87,27 @@ const TerminalComponent = () => {
       col156: 25,
       col157: 25,
       col158: 25,
-      col159: 25
+      col159: 25,
+      col160: 25,
+      col161: 25,
+      col162: 25,
+      col163: 25,
+      col164: 25,
+      col165: 25,
+      col166: 25,
+      col167: 25,
+      col168: 25,
+      col169: 25,
+      col170: 25,
+      col171: 25,
+      col172: 25,
+      col173: 25,
+      col174: 25,
+      col175: 25,
+      col176: 25,
+      col177: 25,
+      col178: 25,
+      col179: 25
     } 
     
     
@@ -124,11 +124,10 @@ const TerminalComponent = () => {
     
     // types the subtitle of big name
     async function titleType() {
-      term.write("\x1b[102G\x1b[0m")
+      term.write("\x1b[119G\x1b[0m")
       term.write("\x1b[16A\x1b[0m")      
       for (const character of subTitle) {
         // turn color to green
-        
         term.write("\x1b[38;5;82m")
         term.write(character)
         await delay(50)
@@ -145,7 +144,7 @@ const TerminalComponent = () => {
       term.write("$ ")
       term.write("\x1b7")
       await titleType()
-      term.write("press any key to stop animation and continue")
+      term.write("\x1b[1mpress any key to stop animation and continue\x1b[22m")
       // make cursor invisible
       term.write("\x1b[?25l")
       await delay(1000)
@@ -160,10 +159,10 @@ const TerminalComponent = () => {
       // make cursor invisible
       term.write("\x1b[?25l")
           
-        
-      term.write("\x1b[25;67H\x1b[0m")
+      // move cursor to start postion
+      term.write("\x1b[25;87H\x1b[0m")
       while (input_buffer.length === 0) {
-        const currentColIndex:number = (Math.floor(Math.random() * (159 - 67 + 1)) + 67)
+        const currentColIndex:number = (Math.floor(Math.random() * (179 - 87 + 1)) + 87)
  
         const currentCol:string = "col"+currentColIndex.toString()
         const currentRowIndex:number = colAnimationIndicies[currentCol]
@@ -181,7 +180,7 @@ const TerminalComponent = () => {
             
           }
           colAnimationIndicies[currentCol] = 25
-          console.log(colAnimationIndicies[currentCol])
+          
           await delay(10)
           } else {    
             term.write(symbs[Math.floor(Math.random() * symbs.length)])
@@ -207,9 +206,9 @@ const TerminalComponent = () => {
         term.write("$ ")
         // make cursor visible
         term.write("\x1b[?25h")
-        // write the symbol the user just typed in to end the animation
-        term.write(input_buffer)
-        
+        // write the symbol the user just typed in to end the animation, in yellow 
+        term.write(`\x1b[38;5;220m${input_buffer}\x1b[0m`)  
+         
     }
 
 
@@ -305,8 +304,8 @@ const TerminalComponent = () => {
         input_buffer = input_buffer.slice(0, -1)
         
       } else {
-        term.write(data)
-
+        // turn color to yellow and write what the user types
+        term.write(`\x1b[38;5;220m${data}\x1b[0m`)  
       }
 
     });
