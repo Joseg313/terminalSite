@@ -1,7 +1,7 @@
 import React, { useEffect, useRef} from "react";
 import { Terminal } from '@xterm/xterm'
 import { WebLinksAddon } from "@xterm/addon-web-links";
-
+import '@xterm/xterm/css/xterm.css'
 
 const TerminalComponent = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -142,6 +142,7 @@ const TerminalComponent = () => {
       term.write("$ ")
       term.write("\x1b7")
       await titleType()
+      term.write("press any key to stop animation and continue")
       // make cursor invisible
       term.write("\x1b[?25l")
       await delay(1000)
@@ -194,8 +195,13 @@ const TerminalComponent = () => {
           }
           
         }
+        // reset the indicies to 25
+        Object.keys(colAnimationIndicies).forEach(key => colAnimationIndicies[key] = 25)
         // restore cursor to the start position
         term.write("\x1b8")
+        term.writeln("")
+        term.writeln("Welcome to my site. Type help to see a list of commands")
+        term.write("$ ")
         // make cursor visible
         term.write("\x1b[?25h")
         // write the symbol the user just typed in to end the animation
@@ -249,6 +255,9 @@ const TerminalComponent = () => {
             })
         // help function
         } else if (currentLine?.trim() === "help") {
+          // turn on italics mode
+          term.write("\x1b[3m")
+          term.write("hello")
           term.writeln("")
           fetch('/help.txt')  
             .then((response) => response.text())
@@ -256,6 +265,8 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+          // turn off italics mode
+          term.write("\x1b[23m")
         // title function
         } else if (currentLine?.trim() === "title") {
           term.reset()

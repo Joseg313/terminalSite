@@ -15,6 +15,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
 const TerminalComponent = ()=>{
     _s();
     const terminalRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -161,6 +162,7 @@ const TerminalComponent = ()=>{
                 term.write("$ ");
                 term.write("\x1b7");
                 await titleType();
+                term.write("press any key to stop animation and continue");
                 // make cursor invisible
                 term.write("\x1b[?25l");
                 await delay(1000);
@@ -202,8 +204,15 @@ const TerminalComponent = ()=>{
                         await delay(5);
                     }
                 }
+                // reset the indicies to 25
+                Object.keys(colAnimationIndicies).forEach({
+                    "TerminalComponent.useEffect.raindropAnimation": (key)=>colAnimationIndicies[key] = 25
+                }["TerminalComponent.useEffect.raindropAnimation"]);
                 // restore cursor to the start position
                 term.write("\x1b8");
+                term.writeln("");
+                term.writeln("Welcome to my site. Type help to see a list of commands");
+                term.write("$ ");
                 // make cursor visible
                 term.write("\x1b[?25h");
                 // write the symbol the user just typed in to end the animation
@@ -256,6 +265,9 @@ const TerminalComponent = ()=>{
                             }["TerminalComponent.useEffect"]);
                         // help function
                         } else if (currentLine?.trim() === "help") {
+                            // turn on italics mode
+                            term.write("\x1b[3m");
+                            term.write("hello");
                             term.writeln("");
                             fetch('/help.txt').then({
                                 "TerminalComponent.useEffect": (response)=>response.text()
@@ -267,6 +279,8 @@ const TerminalComponent = ()=>{
                                     term.write("$ ");
                                 }
                             }["TerminalComponent.useEffect"]);
+                            // turn off italics mode
+                            term.write("\x1b[23m");
                         // title function
                         } else if (currentLine?.trim() === "title") {
                             term.reset();
@@ -314,7 +328,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 309,
+        lineNumber: 320,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -346,12 +360,12 @@ function Home() {
                 children: "hello world"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 8,
+                lineNumber: 11,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$terminal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 9,
+                lineNumber: 12,
                 columnNumber: 7
             }, this)
         ]
