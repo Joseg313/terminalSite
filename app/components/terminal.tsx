@@ -1,17 +1,19 @@
 import React, { useEffect, useRef} from "react";
 import { Terminal } from '@xterm/xterm'
 import { WebLinksAddon } from "@xterm/addon-web-links";
-
+import '@xterm/xterm/css/xterm.css'
 
 const TerminalComponent = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
   const delay = (ms:number) => new Promise(resolve => setTimeout(resolve, ms));
   
   const subTitle = "thinker, programmer, learner"
-  // hold the current indicies for where the animation is at
+  
 
   useEffect (() => {
+    // available symbols for the raindrop animation
     const symbs = ["%","&","*","#","[","^","@","%",")","X"]
+    // hold the current indicies for where the animation is at
     const colAnimationIndicies = {
       col67: 25,
       col68: 25,
@@ -107,49 +109,48 @@ const TerminalComponent = () => {
       col158: 25,
       col159: 25
     } 
+    
+    
     if (!terminalRef.current) return;
     const term = new Terminal({
       cursorBlink: true,
       cols: 200,
       rows: 45
     });
-    
     term.open(terminalRef.current)
-    
- 
     term.loadAddon(new WebLinksAddon());
     
     // functions
+    
+    // types the subtitle of big name
     async function titleType() {
-      
       term.write("\x1b[102G\x1b[0m")
-      term.write("\x1b[16A\x1b[0m")
-      
+      term.write("\x1b[16A\x1b[0m")      
       for (const character of subTitle) {
         term.write(character)
-        
         await delay(50)
       }
       term.write("\x1b8")
     }
     
-
-    
-
-    
-    
+    // prints the large title, subtitle, and raindrop animation
     async function startUp(symbs:Array<string>) {
+      term.focus()
       const response = await fetch('/title.txt')  
       const text = await response.text()
       text.split('\n').forEach((line) => term.writeln(line))
       term.write("$ ")
       term.write("\x1b7")
       await titleType()
-      await delay(2000)
-      raindropAnimation(symbs)
-        
+      term.write("press any key to stop animation and continue")
+      // make cursor invisible
+      term.write("\x1b[?25l")
+      await delay(1000)
+      raindropAnimation(symbs)  
     }
     
+    // animates the termnial with matrix style raindrops
+    // TODO when the animation is stopped reset al lthe indicies to 25
     async function raindropAnimation(symbs:Array<string>) {
       // save current position
       term.write("\x1b7")
@@ -191,32 +192,38 @@ const TerminalComponent = () => {
             colAnimationIndicies[currentCol]++
             
             await delay(5)
-
           }
-              
+          
         }
+        // reset the indicies to 25
+        Object.keys(colAnimationIndicies).forEach(key => colAnimationIndicies[key] = 25)
         // restore cursor to the start position
         term.write("\x1b8")
+        term.writeln("")
+        term.writeln("Welcome to my site. Type help to see a list of commands")
+        term.write("$ ")
         // make cursor visible
         term.write("\x1b[?25h")
-
+        // write the symbol the user just typed in to end the animation
+        term.write(input_buffer)
+        
     }
 
 
 
 
     // logic begins below
+    
+    // begin the startup screen
     startUp(symbs)
-    // raindropAnimation(symbs)
+    
+    // stores what the user currently has typed in 
     let input_buffer = ""
     
     
     // handles when the user types
     term.onData((data) => {
-      
       input_buffer = input_buffer + data
-      
-      
       // handles when the user hits enter key
       if (data.endsWith("\r")) {
         
@@ -224,10 +231,11 @@ const TerminalComponent = () => {
         const currentLine = input_buffer.slice(0, -1)
         console.log("currentLine, ", currentLine)
         input_buffer = ""
-        if (currentLine?.trim() === "clear") {
-          
+        // clear function
+        if (currentLine?.trim() === "clear") { 
           term.reset()
           term.write("$ ")
+        // about function
         } else if (currentLine?.trim() === "about") {
           term.writeln("")
           fetch('/about.txt')  
@@ -236,6 +244,7 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+        // connect function 
         } else if (currentLine?.trim() === "connect") {
           term.writeln("")
           fetch('/connect.txt')  
@@ -244,7 +253,11 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+        // help function
         } else if (currentLine?.trim() === "help") {
+          // turn on italics mode
+          term.write("\x1b[3m")
+          term.write("hello")
           term.writeln("")
           fetch('/help.txt')  
             .then((response) => response.text())
@@ -252,15 +265,22 @@ const TerminalComponent = () => {
               text.split('\n').forEach((line) => term.writeln(line))
               term.write("$ ")
             })
+          // turn off italics mode
+          term.write("\x1b[23m")
+        // title function
         } else if (currentLine?.trim() === "title") {
-
           term.reset()
-          startUp(symbs)
-          
-          
+          startUp(symbs)     
+        // experience function
+        } else if (currentLine?.trim() === "experience") {
+          term.writeln("")
+          term.writeln("Coming Soon")
+          term.write("$ ")    
+        // if the user input is empty
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")
           term.write("$ ")
+        // error if no function is recognized
         } else {
           term.writeln("")
           term.writeln("not found")
@@ -271,17 +291,19 @@ const TerminalComponent = () => {
       else if (data.endsWith("\x7f")) {
         // remove the \x7f
         input_buffer = input_buffer.slice(0, -1)
-        // console.log("input buffer len b4 slice", input_buffer.length, "input buffer b4 slice", input_buffer)
+        
         if (input_buffer.length > 0 && input_buffer !== "\x7f") { 
           input_buffer = input_buffer.slice(0, -1)
-          // console.log("input after slicing", input_buffer)
-          // console.log("inputlength after slicing", input_buffer.length)
+          
           
           term.write('\b')
           term.write(" ")
           term.write('\b')
         }
-       
+      // disable arrow keys
+      } else if (data.endsWith("\x1b[A") || data.endsWith("\x1b[B") || data.endsWith("\x1b[C") || data.endsWith("\x1b[D")) {
+        input_buffer = input_buffer.slice(0, -1)
+        
       } else {
         term.write(data)
 
