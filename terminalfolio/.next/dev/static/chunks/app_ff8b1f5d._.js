@@ -38,26 +38,6 @@ const TerminalComponent = ()=>{
             ];
             // hold the current indicies for where the animation is at
             const colAnimationIndicies = {
-                col67: 25,
-                col68: 25,
-                col69: 25,
-                col70: 25,
-                col71: 25,
-                col72: 25,
-                col73: 25,
-                col74: 25,
-                col75: 25,
-                col76: 25,
-                col77: 25,
-                col78: 25,
-                col79: 25,
-                col80: 25,
-                col81: 25,
-                col82: 25,
-                col83: 25,
-                col84: 25,
-                col85: 25,
-                col86: 25,
                 col87: 25,
                 col88: 25,
                 col89: 25,
@@ -130,7 +110,27 @@ const TerminalComponent = ()=>{
                 col156: 25,
                 col157: 25,
                 col158: 25,
-                col159: 25
+                col159: 25,
+                col160: 25,
+                col161: 25,
+                col162: 25,
+                col163: 25,
+                col164: 25,
+                col165: 25,
+                col166: 25,
+                col167: 25,
+                col168: 25,
+                col169: 25,
+                col170: 25,
+                col171: 25,
+                col172: 25,
+                col173: 25,
+                col174: 25,
+                col175: 25,
+                col176: 25,
+                col177: 25,
+                col178: 25,
+                col179: 25
             };
             if (!terminalRef.current) return;
             const term = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$xterm$2f$xterm$2f$lib$2f$xterm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Terminal"]({
@@ -143,7 +143,7 @@ const TerminalComponent = ()=>{
             // functions
             // types the subtitle of big name
             async function titleType() {
-                term.write("\x1b[102G\x1b[0m");
+                term.write("\x1b[119G\x1b[0m");
                 term.write("\x1b[16A\x1b[0m");
                 for (const character of subTitle){
                     // turn color to green
@@ -177,9 +177,10 @@ const TerminalComponent = ()=>{
                 term.write("\x1b7");
                 // make cursor invisible
                 term.write("\x1b[?25l");
-                term.write("\x1b[25;67H\x1b[0m");
+                // move cursor to start postion
+                term.write("\x1b[25;87H\x1b[0m");
                 while(input_buffer.length === 0){
-                    const currentColIndex = Math.floor(Math.random() * (159 - 67 + 1)) + 67;
+                    const currentColIndex = Math.floor(Math.random() * (179 - 87 + 1)) + 87;
                     const currentCol = "col" + currentColIndex.toString();
                     const currentRowIndex = colAnimationIndicies[currentCol];
                     // move cursor to position described above
@@ -193,7 +194,6 @@ const TerminalComponent = ()=>{
                             term.write("\x1b[1D\x1b[0m");
                         }
                         colAnimationIndicies[currentCol] = 25;
-                        console.log(colAnimationIndicies[currentCol]);
                         await delay(10);
                     } else {
                         term.write(symbs[Math.floor(Math.random() * symbs.length)]);
@@ -217,10 +217,8 @@ const TerminalComponent = ()=>{
                 term.write("$ ");
                 // make cursor visible
                 term.write("\x1b[?25h");
-                // write the symbol the user just typed in to end the animation
-                // turn color to yellow and write what the user types
+                // write the symbol the user just typed in to end the animation, in yellow 
                 term.write(`\x1b[38;5;220m${input_buffer}\x1b[0m`);
-            // term.write(input_buffer)
             }
             // logic begins below
             // begin the startup screen
@@ -328,7 +326,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 321,
+        lineNumber: 319,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };
