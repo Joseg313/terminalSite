@@ -218,7 +218,9 @@ const TerminalComponent = ()=>{
                 // make cursor visible
                 term.write("\x1b[?25h");
                 // write the symbol the user just typed in to end the animation
-                term.write(input_buffer);
+                // turn color to yellow and write what the user types
+                term.write(`\x1b[38;5;220m${input_buffer}\x1b[0m`);
+            // term.write(input_buffer)
             }
             // logic begins below
             // begin the startup screen
@@ -310,7 +312,8 @@ const TerminalComponent = ()=>{
                     } else if (data.endsWith("\x1b[A") || data.endsWith("\x1b[B") || data.endsWith("\x1b[C") || data.endsWith("\x1b[D")) {
                         input_buffer = input_buffer.slice(0, -1);
                     } else {
-                        term.write(data);
+                        // turn color to yellow and write what the user types
+                        term.write(`\x1b[38;5;220m${data}\x1b[0m`);
                     }
                 }
             }["TerminalComponent.useEffect"]);
@@ -325,7 +328,7 @@ const TerminalComponent = ()=>{
         ref: terminalRef
     }, void 0, false, {
         fileName: "[project]/app/components/terminal.tsx",
-        lineNumber: 320,
+        lineNumber: 321,
         columnNumber: 10
     }, ("TURBOPACK compile-time value", void 0));
 };

@@ -128,7 +128,6 @@ const TerminalComponent = () => {
       term.write("\x1b[16A\x1b[0m")      
       for (const character of subTitle) {
         // turn color to green
-        
         term.write("\x1b[38;5;82m")
         term.write(character)
         await delay(50)
@@ -208,7 +207,9 @@ const TerminalComponent = () => {
         // make cursor visible
         term.write("\x1b[?25h")
         // write the symbol the user just typed in to end the animation
-        term.write(input_buffer)
+        // turn color to yellow and write what the user types
+        term.write(`\x1b[38;5;220m${input_buffer}\x1b[0m`)  
+        // term.write(input_buffer)
         
     }
 
@@ -305,8 +306,8 @@ const TerminalComponent = () => {
         input_buffer = input_buffer.slice(0, -1)
         
       } else {
-        term.write(data)
-
+        // turn color to yellow and write what the user types
+        term.write(`\x1b[38;5;220m${data}\x1b[0m`)  
       }
 
     });
