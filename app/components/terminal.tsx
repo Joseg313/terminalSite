@@ -144,7 +144,7 @@ const TerminalComponent = () => {
       term.write("$ ")
       term.write("\x1b7")
       await titleType()
-      term.write("press any key to stop animation and continue")
+      term.write("\x1b[1mpress any key to stop animation and continue\x1b[22m")
       // make cursor invisible
       term.write("\x1b[?25l")
       await delay(1000)
