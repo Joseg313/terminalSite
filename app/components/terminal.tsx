@@ -165,7 +165,7 @@ const TerminalComponent = () => {
         const currentColIndex:number = (Math.floor(Math.random() * (179 - 87 + 1)) + 87)
  
         const currentCol:string = "col"+currentColIndex.toString()
-        const currentRowIndex:number = colAnimationIndicies[currentCol]
+        const currentRowIndex:number = colAnimationIndicies[currentCol as keyof typeof colAnimationIndicies]
         // move cursor to position described above
         term.write(`\x1b[${currentRowIndex};${currentColIndex}H\x1b[0m`)
         if (currentRowIndex > 40) {
@@ -179,7 +179,7 @@ const TerminalComponent = () => {
             term.write("\x1b[1D\x1b[0m")
             
           }
-          colAnimationIndicies[currentCol] = 25
+          colAnimationIndicies[currentCol as keyof typeof colAnimationIndicies] = 25
           
           await delay(10)
           } else {    
@@ -191,14 +191,14 @@ const TerminalComponent = () => {
             term.write("\x1b[1B\x1b[0m")
 
             // update new cursor position
-            colAnimationIndicies[currentCol]++
+            colAnimationIndicies[currentCol as keyof typeof colAnimationIndicies]++
             
             await delay(5)
           }
           
         }
         // reset the indicies to 25
-        Object.keys(colAnimationIndicies).forEach(key => colAnimationIndicies[key] = 25)
+        Object.keys(colAnimationIndicies).forEach(key => colAnimationIndicies[key as keyof typeof colAnimationIndicies] = 25)
         // restore cursor to the start position
         term.write("\x1b8")
         term.writeln("")
