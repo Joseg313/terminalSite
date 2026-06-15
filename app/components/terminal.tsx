@@ -273,8 +273,12 @@ const TerminalComponent = () => {
         // experience function
         } else if (currentLine?.trim() === "experience") {
           term.writeln("")
-          term.writeln("Coming Soon")
-          term.write("$ ")    
+          fetch('/experience.txt')  
+            .then((response) => response.text())
+            .then((text) => {
+              text.split('\n').forEach((line) => term.writeln(line))
+              term.write("$ ")
+            })
         // if the user input is empty
         } else if (currentLine?.trim().length === 0) {
           term.writeln("")

@@ -1,0 +1,44 @@
+For resume pdf, enter command "connect"
+Below is a list of projects and current/past roles I've had.
+
+>Software Enginneer, Harvard Tech for Social Good
+    https://socialgood.hcs.harvard.edu/
+|   -Selected for a project-based program to build and ship application 
+|    for social impact organizations
+|   -Worked with team to develop digital inventory system for homeless clothing closet
+|   -Features developed include: table component using URL search params, csv exporting,
+|    stock history graph using recharts, race condition fixing
+|   -Used version control practices (git/gitHub)
+
+>Terminalfolio (the site you are viewing)
+    **fill this link in when created**
+|   -Designed a personal portfolion webpage to display my interests and experiences
+|   -Utilized xtermjs library and additional addons to emulate terminal style webpage
+|   -Explored terminal animation using ANSI escape codes
+|   -Built using React, nextjs, typescript, html, css
+
+>Software Enginner Intern, Parable Security
+    https://parablesecurity.ai
+|   -Parable Security is an early-stage startup focused on protecting the human layer from cyber attacks
+|   -Implemented after-emulation training module
+
+>Hotbills Near You
+    https://hotbillsnearyou.com
+|   -Yale Hack 2026 UI/UX winning project
+|   -Collaborated with team to build a platform encouraging civil engagement in 
+|   a gamefied tinder-style swipe system
+|   -Utilized React, nextjs, typescript, docker, and various legislative APIs
+
+>Discovery Data Analyst, Harvard Undergraduate Data Analytics Group
+|   -Selected for program focused on applied data science and machine learning for 
+|    client-based analytics projects
+|   -Utilized Python for data analysis, including libraries such as NumPy, pandas, and matplotlib
+|    for data manipultion and visualization
+|   -Enginneered an NLP pipeline to quantify Airbnb reviews for client-based insight
+
+>Hydrography Intern, University of Southern Mississippi
+|    -Designed and conducted hydrographic surveys utilizin an unmanned surface vessel (EchoBoat)
+|    equipped with multi-beam echosounder technology to acquire bathymetric data of the Pearl
+|    River floor
+|   -Processed raw sonar datasets and generated visualizations in HYPACK software, producing
+|    high-res models
