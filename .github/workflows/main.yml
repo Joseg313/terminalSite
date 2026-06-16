@@ -46,6 +46,7 @@ jobs:
           echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
       
+      # 5.5
       - name: Force REPO_NAME to lowercase
         id: lowercase_repo
         run: |
@@ -59,7 +60,7 @@ jobs:
         with:
           context: .
           file: Dockerfile.dev
-          tags: ${{ steps.meta.outputs.LOWER_REPO_NAME }}-dev:latest
+          tags: ${{ env.LOWER_REPO_NAME }}-dev:latest
           load: true # Load to local Docker daemon for testing
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
