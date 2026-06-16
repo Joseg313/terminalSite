@@ -46,6 +46,7 @@ jobs:
           echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
+     
       # 6. Build dev Docker image
       - name: Build Docker image for tests
         uses: docker/build-push-action@v7
@@ -57,13 +58,21 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
+       # 6.5 make lowercase
+      - name: Fore REPO_NAME to lowercase
+      id: lowercase_repo
+      run: |
+        #
+        LOWERCAL_NAME=$(echo "${{ steps.meta.outputs.REPO_NAME }}" | tr '[:upper:]' '[:lower:]')
+        echo "LOWER_REPO_NAME=$LOWERCAL_NAME" >> $GITHUB_ENV
+      
       # 7. Run Vitest tests
       - name: Run Vitest tests and generate report
         run: |
           docker run --rm \
             --workdir /app \
             --entrypoint "" \
-            ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
+            ${{ env.LOWER_REPO_NAME }}-dev:latest \
             sh -c "npm ci && npx vitest run --reporter=verbose"
         env:
           CI: true
