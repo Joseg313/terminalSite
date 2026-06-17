@@ -242,7 +242,7 @@ __turbopack_context__.s([
     "default",
     ()=>__TURBOPACK__default__export__
 ]);
-/* eslint-disable no-var, prefer-template */ var uppercasePattern = /[A-Z]/g;
+  var uppercasePattern = /[A-Z]/g;
 var msPattern = /^ms-/;
 var cache = {};
 function toHyphenLower(match) {
@@ -728,7 +728,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
     /**
    * inlined Object.is polyfill to avoid requiring consumers ship their own
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-   */ /*eslint-disable no-self-compare*/ function is(x, y) {
+   */   function is(x, y) {
         // SameValue algorithm
         if (x === y) {
             // Steps 1-5, 7-10
@@ -739,7 +739,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
             return x !== x && y !== y;
         }
     }
-    /*eslint-enable no-self-compare*/ /**
+      /**
    * We use an Error-like object for backward compatibility as people may call
    * PropTypes directly and inspect their output. However, we don't use real
    * Errors anymore. We don't inspect their stack anyway, and creating them
