@@ -11,7 +11,7 @@ Below is a list of projects and current/past roles I've had.
 |   -Used version control practices (git/gitHub)
 
 >Terminalfolio (the site you are viewing)
-    **fill this link in when created**
+    https://josegarcia.tech
 |   -Designed a personal portfolion webpage to display my interests and experiences
 |   -Utilized xtermjs library and additional addons to emulate terminal style webpage
 |   -Explored terminal animation using ANSI escape codes
@@ -37,7 +37,7 @@ Below is a list of projects and current/past roles I've had.
 |   -Enginneered an NLP pipeline to quantify Airbnb reviews for client-based insight
 
 >Hydrography Intern, University of Southern Mississippi
-|    -Designed and conducted hydrographic surveys utilizin an unmanned surface vessel (EchoBoat)
+|    -Designed and conducted hydrographic surveys utilizing an unmanned surface vessel (EchoBoat)
 |    equipped with multi-beam echosounder technology to acquire bathymetric data of the Pearl
 |    River floor
 |   -Processed raw sonar datasets and generated visualizations in HYPACK software, producing
